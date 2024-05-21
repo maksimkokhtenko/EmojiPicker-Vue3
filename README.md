@@ -5,8 +5,13 @@ This is a Vue.js component that provides a text input with an integrated emoji p
 
 ## Features
 
-- Text input field with a label
 - Emoji picker with categorized emojis
 - Toggle functionality for the emoji picker
 - Click-to-insert functionality for emojis
-- Search
+
+## 📦 Installation
+
+To install demo page of the Emoji Picker component, use npm:
+
+```bash
+npm install
