@@ -7,6 +7,6 @@ import EmojiPicker from './components/EmojiPicker/EmojiPicker.vue'
   <main>
     <h1>EmojiPicker Vue3 Demo</h1>
     <br>
-    <EmojiPicker/>
+    <EmojiPicker :enableSearch="true" :enableFrequentlyUsed="true"/>
   </main>
 </template>

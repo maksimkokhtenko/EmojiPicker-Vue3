@@ -15,3 +15,28 @@ To install demo page of the Emoji Picker component, use npm:
 
 ```bash
 npm install
+```
+
+## Usage
+
+### Import the Component
+
+In your parent component, import the `EmojiPicker` component:
+
+```vue
+import EmojiPicker from './components/EmojiPicker/EmojiPicker.vue'
+
+<template>
+  <div>
+    <EmojiPicker :enableSearch="false" :enableFrequentlyUsed="true" />
+  </div>
+</template>
+```
+
+### Props
+
+Prop Name | Type | Default | Description
+--- | --- | --- | --- |
+enableSearch |	Boolean | true | Enables the emoji search input when set to true.
+enableFrequentlyUsed | Boolean | true | Tracks and displays frequently used emojis when set to true.
+

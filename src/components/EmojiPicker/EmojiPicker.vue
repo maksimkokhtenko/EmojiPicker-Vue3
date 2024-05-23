@@ -5,7 +5,7 @@
         <div class="emojipicker__inner">
             <span class="emojipicker__icon" @click.prevent="togglePicker">😊</span>
             <div class="emojipicker__container" :class="{ open: isOpen }">
-                <input ref="search" type="text" v-model="searchQuery" placeholder="Search emojis..."/>
+                <input v-if="enableSearch" ref="search" type="text" v-model="searchQuery" placeholder="Search emojis..."/>
                 <div v-for="category in displayCategories" :key="category" class="emojipicker__category">
                     <span v-if="category !== 'Frequently used' || hasFrequentlyUsedEmojis">{{ category }}</span>
                     <div class="emojipicker__emojis">
@@ -26,6 +26,18 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import emojis from './emojis.json'
+import { defineProps } from 'vue'
+
+const props = defineProps({
+    enableSearch: {
+        type: Boolean,
+        default: true,
+    },
+    enableFrequentlyUsed: {
+        type: Boolean,
+        default: true,
+    }
+})
 
 const input = ref(null)
 const search = ref(null)
@@ -35,7 +47,7 @@ const frequentlyUsed = ref(JSON.parse(localStorage.getItem('frequentlyUsed')) ||
 
 const categories = computed(() => Object.keys(emojis))
 
-const hasFrequentlyUsedEmojis = computed(() => frequentlyUsed.value['Frequently used'] && frequentlyUsed.value['Frequently used'].length > 0)
+const hasFrequentlyUsedEmojis = computed(() => props.enableFrequentlyUsed && frequentlyUsed.value['Frequently used'] && frequentlyUsed.value['Frequently used'].length > 0)
 
 const filteredEmojis = computed(() => {
     const query = searchQuery.value.toLowerCase()
@@ -67,7 +79,9 @@ const handleEmojiClick = emoji => {
     input.value.value += emoji
     input.value.focus()
     isOpen.value = false
-    updateFrequentlyUsed(emoji)
+    if (props.enableFrequentlyUsed) {
+        updateFrequentlyUsed(emoji)
+    }
 }
 
 const updateFrequentlyUsed = emoji => {
